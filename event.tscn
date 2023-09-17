@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://0vp333cxjgte"]
+
+[ext_resource type="Script" path="res://Event.cs" id="1_p3yir"]
+[ext_resource type="Texture2D" uid="uid://bbhthcvhldpxg" path="res://progress_bar.png" id="2_d7kj6"]
+
+[node name="Event" type="MarginContainer"]
+custom_minimum_size = Vector2(300, 100)
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_p3yir")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Panel"]
+visible = false
+modulate = Color(1, 1, 1, 0.0980392)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+fill_mode = 1
+texture_under = ExtResource("2_d7kj6")
+texture_progress = ExtResource("2_d7kj6")
+tint_under = Color(0.243137, 0.243137, 0.243137, 1)
+
+[connection signal="mouse_entered" from="Panel" to="." method="StopVanish"]
+[connection signal="mouse_exited" from="Panel" to="." method="ContinueVanish"]
