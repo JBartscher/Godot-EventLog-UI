@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dln6mubd6g3ve"]
+[gd_scene load_steps=3 format=3 uid="uid://dln6mubd6g3ve"]
 
-[ext_resource type="Script" path="res://EventContainer.cs" id="1_ta66c"]
+[ext_resource type="Script" path="res://VBoxEventContainer.cs" id="1_r68cy"]
+[ext_resource type="Script" path="res://CustomEventContainer.cs" id="2_3canx"]
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -10,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EventContainer" type="VBoxContainer" parent="."]
+[node name="VBoxEventContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -22,4 +23,16 @@ offset_top = -828.0
 grow_horizontal = 0
 grow_vertical = 0
 alignment = 2
-script = ExtResource("1_ta66c")
+script = ExtResource("1_r68cy")
+
+[node name="CustomEventContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("2_3canx")
+Active = true
+EventRect = Rect2(0, 0, 300, 100)

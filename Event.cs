@@ -1,10 +1,11 @@
 using Godot;
-using System;
+
+namespace EventLogUI;
 
 public partial class Event : MarginContainer
 {
     [Signal]
-    public delegate void VanishedEventHandler();
+    public delegate void VanishedEventHandler(Event vanishedEvent);
 
     private TextureProgressBar _vanishProgressBar;
     private Tween _vanishTween;
@@ -21,22 +22,24 @@ public partial class Event : MarginContainer
 
     public void Vanish()
     {
-        _vanishProgressBar.Visible = true;
         if (_vanishTween != null && _vanishTween.IsRunning())
         {
-            _vanishTween.Kill();
+            return;
         }
-
+        
+        _vanishProgressBar.Value = 100;
+        _vanishProgressBar.Visible = true;
+ 
         _vanishTween = GetTree().CreateTween();
         _vanishTween.SetTrans(Tween.TransitionType.Sine);
-        _vanishTween.TweenProperty(_vanishProgressBar, "value", 0f, 5.0f);
+        _vanishTween.TweenProperty(_vanishProgressBar, "value", 0f, 1.0f);
         _vanishTween.TweenCallback(Callable.From(FinishVanish));
+        _vanishTween.Play();
     }
 
     private void FinishVanish()
     {
-        EmitSignal(SignalName.Vanished);
-        CallDeferred(MethodName.QueueFree);
+        EmitSignal(SignalName.Vanished, this);
     }
 
     public void PauseVanish()
@@ -56,9 +59,9 @@ public partial class Event : MarginContainer
         {
             return;
         }
-
+        _vanishProgressBar.Value = 100;
         _vanishProgressBar.Visible = false;
-        _vanishTween.Stop();
+        _vanishTween.Kill();
     }
 
     public void ContinueVanish()

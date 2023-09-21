@@ -15,9 +15,17 @@ run/main_scene="res://main_ui.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DampedOscillator="*res://addons/DampedOscillator/scripts/damped_oscillator.tscn"
+
 [dotnet]
 
 project/assembly_name="Event-Log-UI"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/DampedOscillator/plugin.cfg")
 
 [input]
 
